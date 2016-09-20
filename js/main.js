@@ -1,31 +1,29 @@
-var urlBase = "https://twitter.com/intent/tweet?text=";
+$(document).ready(function(){
+  var latitude, longitude, cityNameG;
+  var temperature, weatherDescription, cityNameW;
+  var openweathermapURL;
 
-/*
-* This function trim the extra white space and set quote and author as tweet text filling the Twitter intent field "text="
-*/
-function tweetText() {
-    $("a[href^='https://twitter.com/intent/tweet?text=']").prop("href", urlBase + $("#quote").text().trim() + "%0D%0A" + $("#author").text().trim());
-}
+  $.getJSON("http://ip-api.com/json/?callback=?", function(data) {
+    latitude = data.lat;
+    longitude = data.lon;
+    cityNameG = data.city;
 
-/*
-* This function get the Json from quotesondesign.com API and inflates the HTML with quote and author text
-*/
-function getNewQuote() {
+    $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + " &appid=5f7bcf238dc7056a7325948af9cb61be", function(data) {
+        temperature = data.main.temp; // K
+        weatherDescription = data.weather[0].description;
+        cityNameW = data.name;
 
-$( "#quote" ).fadeOut('slow', function() {
-  $.getJSON("http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&_jsonp=?", function(getQuote) {
-      $("#quote").html(getQuote[0].content);
-      $("#author").text("- " + getQuote[0].title);
-      $("#quote").fadeIn(1000);
-      $("#author").fadeIn(1000);
-      tweetText();
+        $(".temperature").text("Temperature: " + temperature + " K");
+        $(".weather").text("Weather condition: " + weatherDescription);
+        $(".coords").text("lat: " + latitude + ", lon: " + longitude);
+        $(".cityg").text("City-apiGeo: " + cityNameG);
+        $(".cityw").text("City-apiWea: " + cityNameW);
+    });
   });
 });
-
-
-}
-
-$(document).ready(function(){
-  getNewQuote();
-  $('#quote-btn').on('click', getNewQuote);
-});
+/*
+http://openweathermap.org/api
+http://openweathermap.org/weather-conditions
+http://stackoverflow.com/questions/8047616/get-a-utc-timestamp-in-javascript
+http://stackoverflow.com/questions/28952550/how-to-convert-utc-timestamp-only-into-local-time-on-the-web-with-javascript
+*/
