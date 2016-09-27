@@ -35,12 +35,7 @@ $(document).ready(function(){
                 showCelsius = false;
             }
         });
-
-        $(".weather").text("Weather condition: " + weatherDescription);
-        $(".coords").text("lat: " + latitude + ", lon: " + longitude);
-        $(".cityg").text("City-apiGeo: " + cityNameG);
-        $(".cityw").text("City-apiWea: " + cityNameW);
-        $(".day-night").text("current time: " + DayNight);
+        $(".cityg").text(cityNameG);
     });
   });
 });
