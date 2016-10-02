@@ -20,17 +20,17 @@ $(document).ready(function(){
           DayNight = "Day";
         } else { DayNight = "Night";}
 
-        $(".temperature").text("Temperature: " + Math.round(temperature - 273.15) + " °C");
+        $(".temperature").text(Math.round(temperature - 273.15) + "°C");
 
         var showCelsius = true;
         $('.btn').on('click', function(){
           if(showCelsius === false) {
-            $(".temperature").text("Temperature: " + Math.round(temperature - 273.15) + " °C");
+            $(".temperature").text(Math.round(temperature - 273.15) + "°C");
             $(".btn").text('°F');
             showCelsius = true;
           }
             else {
-              $(".temperature").text(" Temperature: " + Math.round(temperature * 9 / 5 - 459.67) + " °F");
+              $(".temperature").text(Math.round(temperature * 9 / 5 - 459.67) + "°F");
                 $(".btn").text('°C');
                 showCelsius = false;
             }
