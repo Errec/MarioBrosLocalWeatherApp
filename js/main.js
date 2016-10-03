@@ -24,14 +24,16 @@ $(document).ready(function(){
 
         var showCelsius = true;
         $('.btn').on('click', function(){
+        // $('.btn').css("transform","translate(0,-25px)");
+        $('.box-btn').effect( "bounce", {times:1}, 400 );
           if(showCelsius === false) {
             $(".temperature").text(Math.round(temperature - 273.15) + "°C");
-            $(".btn").text('°F');
+            $(".btn").css('backgroundImage', 'url(\'/img/btn-temp-f.png\')');
             showCelsius = true;
           }
             else {
               $(".temperature").text(Math.round(temperature * 9 / 5 - 459.67) + "°F");
-                $(".btn").text('°C');
+                $(".btn").css('backgroundImage', 'url(\'/img/btn-temp-c.png\')');
                 showCelsius = false;
             }
         });
