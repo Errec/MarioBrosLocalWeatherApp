@@ -2,7 +2,7 @@ $(document).ready(function(){
   var latitude, longitude, cityNameG;
   var temperature, weatherDescription, cityNameW, sunriseTime, sunsetTime;
   var currentTime = new Date().getTime() / 1000;
-  var DayNight;
+  var dayOrNight;
 
   $.getJSON("http://ip-api.com/json/?callback=?", function(data) {
     latitude = data.lat;
@@ -11,35 +11,24 @@ $(document).ready(function(){
 
     $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=6521fda1207eae043017412fa964c906", function(data) {
         temperature = data.main.temp; // K
-        weatherDescription = data.weather[0].description;
+        weatherDescription = data.weather[0].main.toLowerCase();;
         cityNameW = data.name;
         sunriseTime = data.sys.sunrise;
         sunsetTime = data.sys.sunset;
-
-        if (currentTime > sunriseTime && currentTime < sunsetTime) {
-          DayNight = "Day";
-        } else { DayNight = "Night";}
+        dayOrNight = currentTime > sunriseTime && currentTime < sunsetTime; // day: true, night: false
 
         $(".temperature").text(Math.round(temperature - 273.15) + "°C");
 
+        setWeatherBackground(weatherDescription, dayOrNight);
         setTimeout(function() {
           marioJump();
           $("#brick-btn").css('backgroundImage', 'url(\'/img/btn-temp-f.png\')');
-        }, 300);
+        }, 500);
 
         var showCelsius = true;
         $('.btn').on('click', function(){
           marioJump();
-          if(showCelsius === false) {
-            $(".temperature").text(Math.round(temperature - 273.15) + "°C");
-            $("#brick-btn").css('backgroundImage', 'url(\'/img/btn-temp-f.png\')');
-            showCelsius = true;
-          }
-            else {
-              $(".temperature").text(Math.round(temperature * 9 / 5 - 459.67) + "°F");
-                $("#brick-btn").css('backgroundImage', 'url(\'/img/btn-temp-c.png\')');
-                showCelsius = false;
-            }
+          showCelsius = convertTemp(temperature, showCelsius);
         });
         $(".cityg").text(cityNameG);
     });
@@ -55,6 +44,43 @@ function marioJump() {
   setTimeout(function() {
     $('#brick-btn').effect( "bounce", {times:1}, 350 ).delay(700);
   }, 100);
+}
+
+function convertTemp(temperature, showCelsius) {
+  if(showCelsius === false) {
+  $(".temperature").text(Math.round(temperature - 273.15) + "°C");
+  $("#brick-btn").css('backgroundImage', 'url(\'/img/btn-temp-f.png\')');
+  showCelsius = true;
+  }
+  else {
+    $(".temperature").text(Math.round(temperature * 9 / 5 - 459.67) + "°F");
+      $("#brick-btn").css('backgroundImage', 'url(\'/img/btn-temp-c.png\')');
+      showCelsius = false;
+  }
+  return showCelsius;
+}
+
+function setWeatherBackground(description, dayOrNight) {
+    switch(description){
+      case "clear sky":
+      case "few clouds":
+        if (dayOrNight == 1) {
+          $(".box-temperature").css('backgroundImage', 'url(\'/img/marioSunny.png\')');
+        }
+        else {
+          $(".box-temperature").css('backgroundImage', 'url(\'/img/marioNight.png\')');
+        }
+        break;
+
+      case "shower rain":
+      case "rain":
+      case "thunderstorm":
+        $(".box-temperature").css('backgroundImage', 'url(\'/img/marioRain.png\')');
+        break;
+
+      case "snow":
+        $(".box-temperature").css('backgroundImage', 'url(\'/img/marioSnow.png\')');
+  }
 }
 /*
 http://openweathermap.org/api
