@@ -22,18 +22,22 @@ $(document).ready(function(){
 
         $(".temperature").text(Math.round(temperature - 273.15) + "°C");
 
+        setTimeout(function() {
+          marioJump();
+          $("#brick-btn").css('backgroundImage', 'url(\'/img/btn-temp-f.png\')');
+        }, 300);
+
         var showCelsius = true;
         $('.btn').on('click', function(){
-        // $('.btn').css("transform","translate(0,-25px)");
-        $('.box-btn').effect( "bounce", {times:1}, 400 );
+          marioJump();
           if(showCelsius === false) {
             $(".temperature").text(Math.round(temperature - 273.15) + "°C");
-            $(".btn").css('backgroundImage', 'url(\'/img/btn-temp-f.png\')');
+            $("#brick-btn").css('backgroundImage', 'url(\'/img/btn-temp-f.png\')');
             showCelsius = true;
           }
             else {
               $(".temperature").text(Math.round(temperature * 9 / 5 - 459.67) + "°F");
-                $(".btn").css('backgroundImage', 'url(\'/img/btn-temp-c.png\')');
+                $("#brick-btn").css('backgroundImage', 'url(\'/img/btn-temp-c.png\')');
                 showCelsius = false;
             }
         });
@@ -41,6 +45,17 @@ $(document).ready(function(){
     });
   });
 });
+
+function marioJump() {
+  $('#mario-btn').effect( "bounce", {times:1}, 350 );
+  $("#mario-btn").css('backgroundImage', 'url(\'/img/mario1B.png\')');
+  setTimeout(function() {
+    $("#mario-btn").css('backgroundImage', 'url(\'/img/mario1A.png\')');
+  }, 350);
+  setTimeout(function() {
+    $('#brick-btn').effect( "bounce", {times:1}, 350 ).delay(700);
+  }, 100);
+}
 /*
 http://openweathermap.org/api
 http://openweathermap.org/weather-conditions
