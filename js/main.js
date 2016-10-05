@@ -11,7 +11,7 @@ $(document).ready(function(){
 
     $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=6521fda1207eae043017412fa964c906", function(data) {
         temperature = data.main.temp; // K
-        weatherDescription = data.weather[0].main.toLowerCase();;
+        weatherDescription = data.weather[0].main.toLowerCase();
         cityNameW = data.name;
         sunriseTime = data.sys.sunrise;
         sunsetTime = data.sys.sunset;

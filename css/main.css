@@ -10,9 +10,13 @@ html, body {
 body {
   align-items: center;
   background-color: #F4C52F;
+  background-image: url('/img/background.png');
   display: flex;
+  background-size: 100%;
   flex-direction: column;
   height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
   justify-content: center;
   margin: 0;
   overflow: auto;
