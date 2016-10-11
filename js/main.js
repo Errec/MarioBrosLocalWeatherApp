@@ -8,7 +8,7 @@ $(document).ready(function(){
     latitude = data.lat;
     longitude = data.lon;
     cityNameG = data.city;
-
+/*    console.log("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=6521fda1207eae043017412fa964c906");*/
     $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=6521fda1207eae043017412fa964c906", function(data) {
         temperature = data.main.temp; // K
         weatherDescription = data.weather[0].main.toLowerCase();
@@ -60,16 +60,82 @@ function convertTemp(temperature, showCelsius) {
   return showCelsius;
 }
 
+// modified from http://codepen.io/otsukatomoya/pen/gbDxF/
+function makeSnow() {
+  var w = window.innerWidth,
+      h = window.innerHeight,
+      canvas = document.getElementById('particle'),
+      ctx = canvas.getContext('2d'),
+      rate = 50,
+      arc = 500,
+      time,
+      count,
+      size = 2,
+      speed = 10,
+      lights = new Array,
+      colors = ['#eee'];
+
+  canvas.setAttribute('width',w);
+  canvas.setAttribute('height',h);
+
+  function init() {
+    time = 0;
+    count = 0;
+
+    for(var i = 0; i < arc; i++) {
+      lights[i] = {
+        x: Math.ceil(Math.random() * w),
+        y: Math.ceil(Math.random() * h),
+        toX: Math.random() * 5 + 1,
+        toY: Math.random() * 5 + 1,
+        c: colors[Math.floor(Math.random()*colors.length)],
+        size: Math.random() * size
+      }
+    }
+  }
+
+  function bubble() {
+    ctx.clearRect(0,0,w,h);
+
+    for(var i = 0; i < arc; i++) {
+      var li = lights[i];
+
+      ctx.beginPath();
+      ctx.arc(li.x,li.y,li.size,0,Math.PI*2,false);
+      ctx.fillStyle = li.c;
+      ctx.fill();
+
+      li.x = li.x + li.toX * (time * 0.05);
+      li.y = li.y + li.toY * (time * 0.05);
+
+      if(li.x > w) { li.x = 0; }
+      if(li.y > h) { li.y = 0; }
+      if(li.x < 0) { li.x = w; }
+      if(li.y < 0) { li.y = h; }
+    }
+    if(time < speed) {
+      time++;
+    }
+    timerID = setTimeout(bubble,1000/rate);
+  }
+  init();
+  bubble();
+}
+function makeRain() {
+}
+
 function setWeatherBackground(description, dayOrNight) {
     switch(description){
       case "clear sky":
       case "few clouds":
+      case "clouds":
         if (dayOrNight == 1) {
           $(".box-temperature").css('backgroundImage', 'url(\'/img/marioSunny.png\')');
         }
         else {
           $(".box-temperature").css('backgroundImage', 'url(\'/img/marioNight.png\')');
         }
+        makeRain();
         break;
 
       case "shower rain":
@@ -80,6 +146,8 @@ function setWeatherBackground(description, dayOrNight) {
 
       case "snow":
         $(".box-temperature").css('backgroundImage', 'url(\'/img/marioSnow.png\')');
+        makeSnow();
+        break;
   }
 }
 /*
