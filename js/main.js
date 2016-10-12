@@ -8,7 +8,7 @@ $(document).ready(function(){
     latitude = data.lat;
     longitude = data.lon;
     cityNameG = data.city;
-/*    console.log("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=6521fda1207eae043017412fa964c906");*/
+    console.log("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=6521fda1207eae043017412fa964c906");
     $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=6521fda1207eae043017412fa964c906", function(data) {
         temperature = data.main.temp; // K
         weatherDescription = data.weather[0].main.toLowerCase();
@@ -72,7 +72,7 @@ function makeSnow() {
       count,
       size = 2,
       speed = 10,
-      lights = new Array,
+      lights = [],
       colors = ['#eee'];
 
   canvas.setAttribute('width',w);
@@ -90,7 +90,7 @@ function makeSnow() {
         toY: Math.random() * 5 + 1,
         c: colors[Math.floor(Math.random()*colors.length)],
         size: Math.random() * size
-      }
+      };
     }
   }
 
@@ -121,38 +121,74 @@ function makeSnow() {
   init();
   bubble();
 }
+
+// modified from http://codepen.io/amwill/pen/eNMWBp/
 function makeRain() {
+  var canvas = document.getElementById('particle');
+  var ctx = canvas.getContext('2d');
+
+  var W = window.innerWidth;
+  var H = window.innerHeight;
+  canvas.width = W;
+  canvas.height = H;
+
+  var num = 300;
+  var arr = [];
+  var speed = 5;
+
+  for (var i = 0; i < num; i++) {
+    arr.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      w: 1,
+      h: Math.random() * 20,
+      s: Math.random() * 10 + 3
+    });
+  }
+
+  function raindrops() {
+    ctx.clearRect(0,0,W,H);
+    for(var i = 0; i < num; i++) {
+      ctx.fillStyle = 'rgba(158, 202, 255, 1.0)';
+      ctx.fillRect(arr[i].x, arr[i].y, arr[i].w, arr[i].h);
+    }
+    makeItRain();
+  }
+
+  function makeItRain() {
+    for(var i = 0; i< num; i++){
+     arr[i].y += arr[i].s;
+     if(arr[i].y >= H){
+      arr[i].y =- arr[i].h;
+     }
+    }
+  }
+  setInterval(raindrops, 10);
 }
 
 function setWeatherBackground(description, dayOrNight) {
-    switch(description){
-      case "clear sky":
-      case "few clouds":
-      case "clouds":
-        if (dayOrNight == 1) {
-          $(".box-temperature").css('backgroundImage', 'url(\'/img/marioSunny.png\')');
-        }
-        else {
-          $(".box-temperature").css('backgroundImage', 'url(\'/img/marioNight.png\')');
-        }
-        makeRain();
-        break;
+  switch(description){
+    case "clear sky":
+    case "few clouds":
+    case "clouds":
+      if (dayOrNight == 1) {
+        $(".box-temperature").css('backgroundImage', 'url(\'/img/marioSunny.png\')');
+      }
+      else {
+        $(".box-temperature").css('backgroundImage', 'url(\'/img/marioNight.png\')');
+      }
+      break;
 
-      case "shower rain":
-      case "rain":
-      case "thunderstorm":
-        $(".box-temperature").css('backgroundImage', 'url(\'/img/marioRain.png\')');
-        break;
+    case "shower rain":
+    case "rain":
+    case "thunderstorm":
+      $(".box-temperature").css('backgroundImage', 'url(\'/img/marioRain.png\')');
+      makeRain();
+      break;
 
-      case "snow":
-        $(".box-temperature").css('backgroundImage', 'url(\'/img/marioSnow.png\')');
-        makeSnow();
-        break;
+    case "snow":
+      $(".box-temperature").css('backgroundImage', 'url(\'/img/marioSnow.png\')');
+      makeSnow();
+      break;
   }
 }
-/*
-http://openweathermap.org/api
-http://openweathermap.org/weather-conditions
-http://stackoverflow.com/questions/8047616/get-a-utc-timestamp-in-javascript
-http://stackoverflow.com/questions/28952550/how-to-convert-utc-timestamp-only-into-local-time-on-the-web-with-javascript
-*/
