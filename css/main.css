@@ -76,6 +76,7 @@ body {
   font-family: 'Press Start 2P', cursive;
   margin: 10px 0 0 5px;
   position: absolute;
+  z-index: 20;
 }
 
 .cityg {
@@ -93,5 +94,30 @@ body {
   text-shadow: 2px 1px #FFF;
 }
 
+.sun-inner {
+    width: 45px;
+    height: 45px;
+    background-color: transparent;
+    animation-name: topdirection, leftdirection;
+    animation-duration: 1.5s, 1.5s;
+    animation-timing-function: linear, linear;
+    animation-iteration-count: infinite, infinite;
+    animation-direction: alternate;
+    position: absolute;
+    z-index: 10;
+}
 
+.sun-inner img {
+width: 100%;
+}
 
+@keyframes topdirection {
+  0% {top: 25px; animation-timing-function: ease-out;}
+  50% {top: 160px; animation-timing-function: ease-in;}
+  100% {top: 25px;}
+}
+
+@keyframes leftdirection {
+  0% {left: 25px;}
+  100% {left: calc(100% - 70px)}
+}
