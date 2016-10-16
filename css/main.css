@@ -31,7 +31,6 @@ body {
   background-size: 100%;
   outline: 4px solid black;
   box-shadow: 18px 22px 35px -6px rgba(0,0,0,0.75);
-  margin: 20px;
   min-height: 460px;
   overflow: hidden;
   position: relative;
@@ -42,25 +41,10 @@ body {
   animation-delay: 4s;
 }
 
-
-@keyframes thundernight {
-  0% {background-color: #020514;}
-  1% {background-color: white;}
-  2% {background-color: #020514;}
-  100% {background-color: #020514;}
-}
-
-@keyframes thunderday {
-  0% {background-color: #1528A2;}
-  1% {background-color: white;}
-  2% {background-color: #1528A2;}
-  100% {background-color: #1528A2;}
-}
-
 .box-footer {
   display: block;
   font-size: 80%;
-  padding: 10px 0 0 0;
+  padding: 25px 0 0 0;
   text-align: end;
 }
 
@@ -85,8 +69,36 @@ body {
   background-repeat: no-repeat;
   background-color: transparent;
   position: absolute;
-  left:    17px;
-  bottom:   160px;
+  left: 17px;
+  bottom: 160px;
+}
+
+@media screen and (max-width: 480px) {
+  .box-temperature {
+
+    min-height: calc(0.8*460px);
+    height: calc(0.8*460px);
+    width: calc(0.8*380px);
+  }
+
+  #brick-btn {
+    left: calc(0.8*14px);
+    bottom: calc(0.8*245px);
+    width: calc(0.8*40px) !important; /* !important: Fix Jquey effect() resize bug */
+    height: calc(0.8*40px) !important; /* !important: Fix Jquey effect() bug */
+  }
+
+  #mario-btn {
+    left: calc(0.8*17px);
+    bottom: calc(0.8*160px);
+    width: calc(0.8*35px) !important; /* !important: Fix Jquey effect() resize bug */
+    height: calc(0.8*67px) !important; /* !important: Fix Jquey effect() resize bug */
+  }
+}
+
+
+.btn:focus {
+  outline: none;
 }
 
 .displayed-data {
@@ -381,4 +393,18 @@ width: 100%;
   50% {bottom: 100px; animation-timing-function: ease-out;}
   75% {bottom: 90px; animation-timing-function: ease-in;}
   100% {bottom: 120px; animation-timing-function: ease-out;}
+}
+
+@keyframes thundernight {
+  0% {background-color: #020514;}
+  1% {background-color: white;}
+  2% {background-color: #020514;}
+  100% {background-color: #020514;}
+}
+
+@keyframes thunderday {
+  0% {background-color: #1528A2;}
+  1% {background-color: white;}
+  2% {background-color: #1528A2;}
+  100% {background-color: #1528A2;}
 }
