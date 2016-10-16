@@ -28,16 +28,33 @@ body {
 }
 
 .box-temperature {
-  background: canvas(snow);
   background-size: 100%;
-  border: 1px solid black;
+  outline: 4px solid black;
   box-shadow: 18px 22px 35px -6px rgba(0,0,0,0.75);
   margin: 20px;
-  min-height: 430.8px;
+  min-height: 460px;
   overflow: hidden;
   position: relative;
-  height: 430.8px;
-  width: 376.98px;
+  height: 460px;
+  width: 380px;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-delay: 4s;
+}
+
+
+@keyframes thundernight {
+  0% {background-color: #020514;}
+  1% {background-color: white;}
+  2% {background-color: #020514;}
+  100% {background-color: #020514;}
+}
+
+@keyframes thunderday {
+  0% {background-color: #020514;}
+  1% {background-color: white;}
+  2% {background-color: #020514;}
+  100% {background-color: #020514;}
 }
 
 .box-footer {
@@ -50,26 +67,26 @@ body {
 #brick-btn {
   background-size: 100%;
   margin: 60px 0 0 17px;
-  width: 35px !important; /* !important: Fix Jquey effect() resize bug */
-  height: 35px !important; /* !important: Fix Jquey effect() bug */
+  width: 40px !important; /* !important: Fix Jquey effect() resize bug */
+  height: 40px !important; /* !important: Fix Jquey effect() bug */
   border-radius: 0;
   position: absolute;
-  left: 19px;
-  bottom: 168px;
+  left: 14px;
+  bottom: 245px;
     background-color: transparent;
 }
 
 #mario-btn {
   background-size: 100%;
   margin: 60px 0 0 17px;
-  width: 28.175px !important; /* !important: Fix Jquey effect() resize bug */
-  height: 54.3375px !important; /* !important: Fix Jquey effect() resize bug */
+  width: 35px !important; /* !important: Fix Jquey effect() resize bug */
+  height: 67px !important; /* !important: Fix Jquey effect() resize bug */
   border-radius: 0;
   background-repeat: no-repeat;
   background-color: transparent;
   position: absolute;
-  left:    22px;
-  bottom:   97px;
+  left:    17px;
+  bottom:   160px;
 }
 
 .displayed-data {
@@ -83,7 +100,7 @@ body {
   font-size: 20px;
   margin-left: 5px;
   margin-top: -20px;
-  max-width: 20%;
+  max-width: 60%;
   text-shadow: 0 1px #FFF;
   word-spacing: -10px;
 }
@@ -95,10 +112,10 @@ body {
 }
 
 .sun-inner {
-    width: 45px;
-    height: 45px;
+    width: 70px;
+    height: 70px;
     background-color: transparent;
-    animation-name: topdirection, leftdirection;
+    animation-name: suntopmov, sunleftmov;
     animation-duration: 1.5s, 1.5s;
     animation-timing-function: linear, linear;
     animation-iteration-count: infinite, infinite;
@@ -107,17 +124,87 @@ body {
     z-index: 10;
 }
 
+@keyframes suntopmov {
+  0% {top: 50px; animation-timing-function: ease-out;}
+  50% {top: 160px; animation-timing-function: ease-in;}
+  100% {top: 50px;}
+}
+
+@keyframes sunleftmov {
+  0% {left: 25px;}
+  100% {left: calc(100% - 70px)}
+}
+
 .sun-inner img {
 width: 100%;
 }
 
-@keyframes topdirection {
-  0% {top: 25px; animation-timing-function: ease-out;}
-  50% {top: 160px; animation-timing-function: ease-in;}
-  100% {top: 25px;}
+.star {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 60px;
+  top: 70px;
+}
+.star img {
+width: 100%;
 }
 
-@keyframes leftdirection {
-  0% {left: 25px;}
-  100% {left: calc(100% - 70px)}
+.cloud-rain {
+  width: 315px;
+  height: 35px;
+}
+
+.cloud-rain img {
+  width: 100%;
+}
+
+#cloud-rain-1 {
+  position: absolute;
+  right: 40px;
+  top: 25px;
+  animation-duration: 65s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+    animation-name: cloudrighttoleft;
+}
+
+#cloud-rain-2 {
+  position: absolute;
+  right: 40px;
+  top: 5px;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: cloudlefttoright;
+}
+
+#cloud-rain-3 {
+  position: absolute;
+  right: 40px;
+  top: 65px;
+  animation-duration: 40s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: cloudlefttoright;
+}
+
+#cloud-rain-4 {
+  position: absolute;
+  right: 40px;
+  top: -15px;
+  animation-duration: 15s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: cloudrighttoleft;
+}
+
+@keyframes cloudlefttoright {
+  0% {left: -315px;}
+  100% {left: 100%}
+}
+
+@keyframes cloudrighttoleft {
+  0% {left: 100%}
+  100% {left: -315px;}
 }

@@ -37,9 +37,9 @@ $(document).ready(function(){
 
 function marioJump() {
   $('#mario-btn').effect( "bounce", {times:1}, 350 );
-  $("#mario-btn").css('backgroundImage', 'url(\'/img/mario1B.png\')');
+  $("#mario-btn").css('backgroundImage', 'url(\'/img/mario-jump.png\')');
   setTimeout(function() {
-    $("#mario-btn").css('backgroundImage', 'url(\'/img/mario1A.png\')');
+    $("#mario-btn").css('backgroundImage', 'url(\'/img/mario-stand.png\')');
   }, 350);
   setTimeout(function() {
     $('#brick-btn').effect( "bounce", {times:1}, 350 ).delay(700);
@@ -123,7 +123,7 @@ function makeSnow() {
 }
 
 // modified from http://codepen.io/amwill/pen/eNMWBp/
-function makeRain() {
+function makeRain(dropSizeFactor, interval) {
   var canvas = document.getElementById('particle');
   var ctx = canvas.getContext('2d');
 
@@ -141,7 +141,7 @@ function makeRain() {
       x: Math.random() * W,
       y: Math.random() * H,
       w: 1,
-      h: Math.random() * 20,
+      h: Math.random() * dropSizeFactor,
       s: Math.random() * 10 + 3
     });
   }
@@ -163,32 +163,81 @@ function makeRain() {
      }
     }
   }
-  setInterval(raindrops, 10);
+  setInterval(raindrops, interval);
 }
 
 function setWeatherBackground(description, dayOrNight) {
   switch(description){
-    case "clear sky":
-    case "few clouds":
-    case "clouds":
-      if (dayOrNight == 1) {
-        $(".box-temperature").css('backgroundImage', 'url(\'/img/marioSunny.png\')');
-      }
-      else {
-        $(".box-temperature").css('backgroundImage', 'url(\'/img/marioNight.png\')');
-      }
-      break;
-
-    case "shower rain":
     case "rain":
+    case "clear":
     case "thunderstorm":
-      $(".box-temperature").css('backgroundImage', 'url(\'/img/marioRain.png\')');
-      makeRain();
-      break;
-
     case "snow":
-      $(".box-temperature").css('backgroundImage', 'url(\'/img/marioSnow.png\')');
-      makeSnow();
-      break;
+    cardSnow(dayOrNight);
+    break;
   }
+}
+
+function cardClear(dayOrNight) {
+  $(".box-temperature").css('backgroundImage', 'url(\'/img/card-clear.png\')');
+  if (dayOrNight == 1) {
+    $(".box-temperature").css('background-color', '#5C94FC');
+    $('.displayed-data').after('<div class="sun-wrapper"><div class="sun-inner"><img src=\'/img/sun-animated.gif\' ></div></div>');
+  }
+  else {
+    $(".box-temperature").css('background-color', '#090F1B');
+    $('.displayed-data').after('<div class="star"><img src=\'/img/star.png\' ></div>');
+  }
+}
+
+function cardThunderstorm(dayOrNight) {
+  $(".box-temperature").css('backgroundImage', 'url(\'/img/card-clear.png\')');
+  $('.displayed-data').after('<div id="cloud-rain-1" class="cloud-rain"><img src=\'/img/cloud-rain.png\' ></div>');
+  $('#cloud-rain-1').after('<div id="cloud-rain-2" class="cloud-rain"><img src=\'/img/cloud-rain.png\' ></div>');
+  $('#cloud-rain-2').after('<div id="cloud-rain-3" class="cloud-rain"><img src=\'/img/cloud-rain.png\' ></div>');
+  $('#cloud-rain-3').after('<div id="cloud-rain-4" class="cloud-rain"><img src=\'/img/cloud-rain.png\' ></div>');
+
+  if (dayOrNight == 1) {
+    $(".box-temperature").css('background-color', '#1528A2');
+    $(".box-temperature").css('animation-name', 'thunderday');
+  } else {
+      $(".box-temperature").css('background-color', '#020514');
+      $(".box-temperature").css('animation-name', 'thundernight');
+    }
+
+  makeRain(25,5);
+}
+
+function cardSnow(dayOrNight) {
+  $(".box-temperature").css('backgroundImage', 'url(\'/img/card-snow.png\')');
+
+  if (dayOrNight == 1) {
+    $(".box-temperature").css('background-color', '#2142FF');
+  } else {
+      $(".box-temperature").css('background-color', '#12248D');
+    }
+  makeSnow();
+}
+
+function cardClouds(dayOrNight) {
+
+}
+
+function cardAtmosphere(dayOrNight) {
+
+}
+
+function cardDrizzle(dayOrNight) {
+
+}
+
+function cardRain(dayOrNight) {
+
+}
+
+function cardExtreme(dayOrNight) {
+
+}
+
+function cardAdditional(dayOrNight) {
+
 }
