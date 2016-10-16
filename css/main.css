@@ -51,10 +51,10 @@ body {
 }
 
 @keyframes thunderday {
-  0% {background-color: #020514;}
+  0% {background-color: #1528A2;}
   1% {background-color: white;}
-  2% {background-color: #020514;}
-  100% {background-color: #020514;}
+  2% {background-color: #1528A2;}
+  100% {background-color: #1528A2;}
 }
 
 .box-footer {
@@ -73,7 +73,7 @@ body {
   position: absolute;
   left: 14px;
   bottom: 245px;
-    background-color: transparent;
+  background-color: transparent;
 }
 
 #mario-btn {
@@ -112,16 +112,16 @@ body {
 }
 
 .sun-inner {
-    width: 70px;
-    height: 70px;
-    background-color: transparent;
-    animation-name: suntopmov, sunleftmov;
-    animation-duration: 1.5s, 1.5s;
-    animation-timing-function: linear, linear;
-    animation-iteration-count: infinite, infinite;
-    animation-direction: alternate;
-    position: absolute;
-    z-index: 10;
+  width: 70px;
+  height: 70px;
+  background-color: transparent;
+  animation-name: suntopmov, sunleftmov;
+  animation-duration: 1.5s, 1.5s;
+  animation-timing-function: linear, linear;
+  animation-iteration-count: infinite, infinite;
+  animation-direction: alternate;
+  position: absolute;
+  z-index: 10;
 }
 
 @keyframes suntopmov {
@@ -166,7 +166,7 @@ width: 100%;
   animation-duration: 65s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-    animation-name: cloudrighttoleft;
+  animation-name: cloudrainrighttoleft;
 }
 
 #cloud-rain-2 {
@@ -176,7 +176,7 @@ width: 100%;
   animation-duration: 20s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  animation-name: cloudlefttoright;
+  animation-name: cloudrainlefttoright;
 }
 
 #cloud-rain-3 {
@@ -186,7 +186,7 @@ width: 100%;
   animation-duration: 40s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  animation-name: cloudlefttoright;
+  animation-name: cloudrainlefttoright;
 }
 
 #cloud-rain-4 {
@@ -196,15 +196,189 @@ width: 100%;
   animation-duration: 15s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  animation-name: cloudrighttoleft;
+  animation-name: cloudrainrighttoleft;
 }
 
-@keyframes cloudlefttoright {
+@keyframes cloudrainlefttoright {
   0% {left: -315px;}
   100% {left: 100%}
 }
 
-@keyframes cloudrighttoleft {
+@keyframes cloudrainrighttoleft {
   0% {left: 100%}
   100% {left: -315px;}
+}
+
+.cloud-double {
+  width: 125px;
+  height: 60px;
+}
+
+.cloud-double img {
+  width: 100%;
+}
+
+#cloud-double-1 {
+  position: absolute;
+  right: 40px;
+  top: 95px;
+  animation-duration: 55s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+    animation-name: clouddoublerighttoleft;
+}
+
+#cloud-double-2 {
+  position: absolute;
+  right: 40px;
+  top: 5px;
+  animation-duration: 190s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: clouddoublelefttoright;
+}
+
+#cloud-double-3 {
+  position: absolute;
+  right: 40px;
+  top: 65px;
+  animation-duration: 150s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: clouddoublelefttoright;
+}
+
+#cloud-double-4 {
+  position: absolute;
+  right: 40px;
+  top: -15px;
+  animation-duration: 105s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: clouddoublerighttoleft;
+}
+
+@keyframes clouddoublelefttoright {
+  0% {left: -125px;}
+  100% {left: 100%}
+}
+
+@keyframes clouddoublerighttoleft {
+  0% {left: 100%}
+  100% {left: -125px;}
+}
+
+.cloud-simple {
+  width: 83px;
+  height: 60px;
+}
+
+.cloud-simple img {
+  width: 100%;
+}
+
+#cloud-simple-1 {
+  position: absolute;
+  right: 40px;
+  top: 85px;
+  animation-duration: 20s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: cloudsimplerighttoleft;
+}
+
+#cloud-simple-2 {
+  position: absolute;
+  right: 35px;
+  top: 20px;
+  animation-duration: 40s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: cloudsimplelefttoright;
+}
+
+@keyframes cloudsimplelefttoright {
+  0% {left: -83px;}
+  100% {left: 100%}
+}
+
+@keyframes cloudsimplerighttoleft {
+  0% {left: 100%}
+  100% {left: -83px;}
+}
+
+.leaf-green {
+  width: 40px;
+  height: 35px;
+}
+
+.leaf-green img {
+  width: 100%;
+}
+
+#leaf-green-1 {
+  position: absolute;
+  bottom: 40px;
+  animation-duration: 3s, 3s;
+  animation-timing-function: linear, linear;
+  animation-iteration-count: infinite, infinite;
+  animation-name: leaflefttoright, leafbottomtop1;
+}
+
+#leaf-green-2 {
+  position: absolute;
+  bottom: 160px;
+  animation-duration: 1.8s, 1.8s;
+  animation-timing-function: linear, linear;
+  animation-iteration-count: infinite, infinite;
+    animation-name: leaflefttoright, leafbottomtop2;
+}
+
+#leaf-green-3 {
+  position: absolute;
+  bottom: 300px;
+  animation-duration: 2s, 2s;
+  animation-timing-function: linear, linear;
+  animation-iteration-count: infinite, infinite;
+    animation-name: leaflefttoright, leafbottomtop3;
+}
+
+#leaf-green-4 {
+  position: absolute;
+  bottom: 100px;
+  animation-duration: 1.5s, 1.5s;
+  animation-timing-function: linear, linear;
+  animation-iteration-count: infinite, infinite;
+    animation-name: leaflefttoright, leafbottomtop4;
+}
+
+@keyframes leaflefttoright {
+  0% {left: -40px;}
+  100% {left: 100%}
+}
+
+@keyframes leafbottomtop1 {
+  0% {bottom: 30px; animation-timing-function: ease-out;}
+  25% {bottom: 60px; animation-timing-function: ease-in;}
+  100% {bottom: 30px; animation-timing-function: ease-out;}
+}
+
+@keyframes leafbottomtop2 {
+  0% {bottom: 120px; animation-timing-function: ease-out;}
+  25% {bottom: 160px; animation-timing-function: ease-in;}
+  100% {bottom: 120px; animation-timing-function: ease-out;}
+}
+
+@keyframes leafbottomtop3 {
+  0% {bottom: 300px; animation-timing-function: ease-out;}
+  25% {bottom: 340px; animation-timing-function: ease-in;}
+  100% {bottom: 250px; animation-timing-function: ease-out;}
+}
+
+@keyframes leafbottomtop4 {
+  0% {bottom: 100px; animation-timing-function: ease-out;}
+  25% {bottom: 140px; animation-timing-function: ease-in;}
+  50% {bottom: 100px; animation-timing-function: ease-out;}
+  75% {bottom: 90px; animation-timing-function: ease-in;}
+  100% {bottom: 120px; animation-timing-function: ease-out;}
 }

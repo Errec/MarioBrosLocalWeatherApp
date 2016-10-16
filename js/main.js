@@ -168,11 +168,40 @@ function makeRain(dropSizeFactor, interval) {
 
 function setWeatherBackground(description, dayOrNight) {
   switch(description){
-    case "rain":
-    case "clear":
     case "thunderstorm":
+    cardThunderstorm(dayOrNight);
+    break;
+
+    case "drizzle":
+    cardDrizzle(dayOrNight);
+    break;
+
+    case "rain":
+    cardRain(dayOrNight);
+    break;
+
     case "snow":
     cardSnow(dayOrNight);
+    break;
+
+    case "atmosphere":
+    cardAtmosphere(dayOrNight);
+    break;
+
+    case "clear":
+    cardClear(dayOrNight);
+    break;
+
+    case "clouds":
+    cardClouds(dayOrNight);
+    break;
+
+    case "extreme":
+    cardExtreme(dayOrNight);
+    break;
+
+    case "additional":
+    cardAdditional(dayOrNight);
     break;
   }
 }
@@ -191,10 +220,11 @@ function cardClear(dayOrNight) {
 
 function cardThunderstorm(dayOrNight) {
   $(".box-temperature").css('backgroundImage', 'url(\'/img/card-clear.png\')');
-  $('.displayed-data').after('<div id="cloud-rain-1" class="cloud-rain"><img src=\'/img/cloud-rain.png\' ></div>');
-  $('#cloud-rain-1').after('<div id="cloud-rain-2" class="cloud-rain"><img src=\'/img/cloud-rain.png\' ></div>');
-  $('#cloud-rain-2').after('<div id="cloud-rain-3" class="cloud-rain"><img src=\'/img/cloud-rain.png\' ></div>');
-  $('#cloud-rain-3').after('<div id="cloud-rain-4" class="cloud-rain"><img src=\'/img/cloud-rain.png\' ></div>');
+  $('.displayed-data')
+  .after('<div id="cloud-rain-1" class="cloud-rain"><img src=\'/img/cloud-rain.png\' ></div>',
+         '<div id="cloud-rain-2" class="cloud-rain"><img src=\'/img/cloud-rain.png\' ></div>',
+         '<div id="cloud-rain-3" class="cloud-rain"><img src=\'/img/cloud-rain.png\' ></div>',
+         '<div id="cloud-rain-4" class="cloud-rain"><img src=\'/img/cloud-rain.png\' ></div>');
 
   if (dayOrNight == 1) {
     $(".box-temperature").css('background-color', '#1528A2');
@@ -209,35 +239,99 @@ function cardThunderstorm(dayOrNight) {
 
 function cardSnow(dayOrNight) {
   $(".box-temperature").css('backgroundImage', 'url(\'/img/card-snow.png\')');
+  $('.displayed-data')
+  .after('<div id="cloud-simple-1" class="cloud-simple"><img src=\'/img/cloud-simple.png\' ></div>',
+         '<div id="cloud-simple-2" class="cloud-simple"><img src=\'/img/cloud-simple.png\' ></div>');
 
   if (dayOrNight == 1) {
     $(".box-temperature").css('background-color', '#2142FF');
   } else {
-      $(".box-temperature").css('background-color', '#12248D');
+      $(".box-temperature").css('background-color', '#060E39');
+          $('.displayed-data').after('<div class="star"><img src=\'/img/star.png\' ></div>');
     }
   makeSnow();
 }
 
 function cardClouds(dayOrNight) {
+  $(".box-temperature").css('backgroundImage', 'url(\'/img/card-clear.png\')');
+  $('.displayed-data')
+  .after('<div id="cloud-double-1" class="cloud-double"><img src=\'/img/cloud-double.png\' ></div>',
+         '<div id="cloud-double-2" class="cloud-double"><img src=\'/img/cloud-double.png\' ></div>',
+         '<div id="cloud-double-3" class="cloud-double"><img src=\'/img/cloud-double.png\' ></div>',
+         '<div id="cloud-double-4" class="cloud-double"><img src=\'/img/cloud-double.png\' ></div>',
+         '<div id="cloud-simple-1" class="cloud-simple"><img src=\'/img/cloud-simple.png\' ></div>',
+         '<div id="cloud-simple-2" class="cloud-simple"><img src=\'/img/cloud-simple.png\' ></div>');
 
-}
-
-function cardAtmosphere(dayOrNight) {
-
+  if (dayOrNight == 1) {
+    $(".box-temperature").css('background-color', '#5C94FC');
+  } else {
+      $(".box-temperature").css('background-color', '#090F1B');
+    }
 }
 
 function cardDrizzle(dayOrNight) {
+  $(".box-temperature").css('backgroundImage', 'url(\'/img/card-clear.png\')');
+  $('.displayed-data').after('<div id="cloud-rain-2" class="cloud-rain"><img src=\'/img/cloud-rain.png\' ></div>');
 
+  if (dayOrNight == 1) {
+    $(".box-temperature").css('background-color', '#1528A2');
+  } else {
+      $(".box-temperature").css('background-color', '#020514');
+    }
+
+  makeRain(5,15);
 }
 
 function cardRain(dayOrNight) {
+  $(".box-temperature").css('backgroundImage', 'url(\'/img/card-clear.png\')');
+  $('.displayed-data')
+  .after('<div id="cloud-rain-1" class="cloud-rain"><img src=\'/img/cloud-rain.png\' ></div>',
+         '<div id="cloud-rain-2" class="cloud-rain"><img src=\'/img/cloud-rain.png\' ></div>');
 
+  if (dayOrNight == 1) {
+    $(".box-temperature").css('background-color', '#1528A2');
+  } else {
+      $(".box-temperature").css('background-color', '#020514');
+    }
+
+  makeRain(20,10);
 }
 
 function cardExtreme(dayOrNight) {
+  $(".box-temperature").css('backgroundImage', 'url(\'/img/card-clear.png\')');
+  $('.displayed-data')
+  .after('<div class="leaf-wrapper"><div id="leaf-green-1" class="leaf-green"><img src=\'/img/leaf-green.png\' ></div></div>',
+         '<div class="leaf-wrapper"><div id="leaf-green-2" class="leaf-green"><img src=\'/img/leaf-green.png\' ></div></div>',
+         '<div class="leaf-wrapper"><div id="leaf-green-3" class="leaf-green"><img src=\'/img/leaf-green.png\' ></div></div>',
+         '<div class="leaf-wrapper"><div id="leaf-green-4" class="leaf-green"><img src=\'/img/leaf-green.png\' ></div></div>');
 
+  if (dayOrNight == 1) {
+    $(".box-temperature").css('background-color', '#5C94FC');
+  } else {
+      $(".box-temperature").css('background-color', '#090F1B');
+    }
 }
 
 function cardAdditional(dayOrNight) {
+  $(".box-temperature").css('backgroundImage', 'url(\'/img/card-clear.png\')');
+  $('.displayed-data')
+  .after('<div class="leaf-wrapper"><div id="leaf-green-1" class="leaf-green"><img src=\'/img/leaf-green.png\' ></div></div>',
+         '<div id="cloud-simple-1" class="cloud-simple"><img src=\'/img/cloud-simple.png\' ></div>',
+         '<div id="cloud-simple-2" class="cloud-simple"><img src=\'/img/cloud-simple.png\' ></div>');
 
+  if (dayOrNight == 1) {
+    $(".box-temperature").css('background-color', '#5C94FC');
+  } else {
+      $(".box-temperature").css('background-color', '#090F1B');
+    }
+}
+
+function cardAtmosphere(dayOrNight) {
+  $(".box-temperature").css('backgroundImage', 'url(\'/img/card-clear.png\')');
+
+  if (dayOrNight == 1) {
+    $(".box-temperature").css('background-color', '#C6D3D8');
+  } else {
+      $(".box-temperature").css('background-color', '#828C8F');
+    }
 }
