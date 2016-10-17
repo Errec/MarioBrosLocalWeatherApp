@@ -19,12 +19,12 @@ body {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  animation: animatedBackground 40s linear infinite;
+  animation: animatedBackground 75s linear infinite;
 }
 
 @keyframes animatedBackground {
   from { background-position: 0; }
-  to { background-position: 1026px; }
+  to { background-position: 2250px; }
 }
 
 .box-temperature {
@@ -74,8 +74,12 @@ body {
 }
 
 @media screen and (max-width: 480px) {
-  .box-temperature {
+  body {
+    background-size: auto 200px;
+      background-repeat: repeat;
+  }
 
+  .box-temperature {
     min-height: calc(0.8*460px);
     height: calc(0.8*460px);
     width: calc(0.8*380px);
